@@ -13,7 +13,16 @@ function toggleVideoStatus() {
 }
 
 function updatePlayIcon() {
-    return true;
+    if(video.paused) {
+        play.innerHTML = '<i class="fa fa-play fa-2x"></i>'
+    } else {
+        play.innerHTML = '<i class="fa fa-pause fa-2x"></i>'
+    }
+}
+
+function stopVideo() {
+    video.currentTime = 0;
+    video.pause();
 }
 
 function updateProgress() {
@@ -24,9 +33,6 @@ function setVideoProgress() {
 
 }
 
-function stopVideo() {
-
-}
 
 // 비디오 재생 상태 이벤트
 video.addEventListener('click', toggleVideoStatus);
