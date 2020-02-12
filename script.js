@@ -25,12 +25,29 @@ function stopVideo() {
     video.pause();
 }
 
+// progress바 위치
 function updateProgress() {
+    console.log(video.currentTime);
+    console.log(video.duration);
+    progress.value = (video.currentTime / video.duration) * 100;
+
+    // 재생시간 표시
+    let mins = Math.floor(video.currentTime / 60);
+    if (mins < 60) {
+        mins = '0' +  mins;
+    }
+
+    let secs  = Math.floor(video.currentTime % 60);
+    if (secs < 10) {
+        secs = '0' + secs;
+    }
+
+    timestamp.innerHTML = mins + ':' + secs;
 
 }
 
 function setVideoProgress() {
-
+    video.currentTime = (progress.value * video.duration) / 100;
 }
 
 
@@ -44,4 +61,5 @@ video.addEventListener('timeupdate', updateProgress);
 play.addEventListener('click', toggleVideoStatus);
 stop.addEventListener('click', stopVideo);
 
-progress.addEventListener('click', setVideoProgress);
+// 사용자에 의해 progress바 위치 이동시
+progress.addEventListener('change', setVideoProgress);
